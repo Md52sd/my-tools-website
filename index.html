@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>???? ???? ??? ????</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f0f0;
+      margin: 0; padding: 20px;
+      direction: rtl;
+      text-align: right;
+    }
+    h1 { color: #333; }
+    .tool {
+      background: #fff;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label, button {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    textarea, input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .output {
+      margin-top: 10px;
+      padding: 10px;
+      background: #e9ecef;
+      border-radius: 4px;
+      min-height: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>???? ???? ??? ????</h1>
+
+  <!-- Text to Emoji Converter -->
+  <div class="tool">
+    <label for="textInput">??? ????? (Text to Emoji):</label>
+    <textarea id="textInput" rows="3" placeholder="???? ????? ?????..."></textarea>
+    <button onclick="convertToEmoji()">?????? ??? ????? ????</button>
+    <div id="emojiOutput" class="output"></div>
+  </div>
+
+  <!-- Urdu Typing Tool -->
+  <div class="tool">
+    <label for="urduInput">???? ??? ???? ????:</label>
+    <input type="text" id="urduInput" placeholder="???? ??? ?????..." oninput="urduTypingTool()" />
+    <div id="urduOutput" class="output"></div>
+  </div>
+
+  <script>
+    // Simple text to emoji converter (few keywords)
+    function convertToEmoji() {
+      let text = document.getElementById('textInput').value.toLowerCase();
+      let emojiMap = {
+        'happy': '??',
+        'sad': '??',
+        'love': '??',
+        'fire': '??',
+        'star': '?',
+        'hello': '??',
+        'ok': '??',
+        'cool': '??',
+        'laugh': '??'
+      };
+      let words = text.split(' ');
+      let result = words.map(w => emojiMap[w] || w).join(' ');
+      document.getElementById('emojiOutput').innerText = result;
+    }
+
+    // Simple Urdu typing echo (just shows input here)
+    function urduTypingTool() {
+      let val = document.getElementById('urduInput').value;
+      document.getElementById('urduOutput').innerText = val;
+    }
+  </script>
+
+</body>
+</html>
