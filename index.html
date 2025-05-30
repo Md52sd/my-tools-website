@@ -1,105 +1,73 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>???? ???? ??? ????</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Tools Website</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f0f0f0;
-      margin: 0; padding: 20px;
-      direction: rtl;
-      text-align: right;
-    }
+    body { font-family: Arial, sans-serif; margin: 20px; background-color: #f2f2f2; }
     h1 { color: #333; }
-    .tool {
-      background: #fff;
-      padding: 15px;
-      margin: 15px 0;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    label, button {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    textarea, input[type="text"] {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-      padding: 10px;
-      border-radius: 4px;
-      margin-top: 10px;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .output {
-      margin-top: 10px;
-      padding: 10px;
-      background: #e9ecef;
-      border-radius: 4px;
-      min-height: 40px;
-    }
+    textarea, input[type="text"] { width: 100%; padding: 10px; margin: 10px 0; }
+    button { padding: 10px 15px; margin: 10px 0; cursor: pointer; }
+    .tool { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
   </style>
 </head>
 <body>
+  <h1>My Tools Website</h1>
 
-  <h1>???? ???? ??? ????</h1>
-
-  <!-- Text to Emoji Converter -->
+  <!-- Bio Generator -->
   <div class="tool">
-    <label for="textInput">??? ????? (Text to Emoji):</label>
-    <textarea id="textInput" rows="3" placeholder="???? ????? ?????..."></textarea>
-    <button onclick="convertToEmoji()">?????? ??? ????? ????</button>
-    <div id="emojiOutput" class="output"></div>
+    <h2>Bio Generator</h2>
+    <input type="text" id="bioName" placeholder="Enter your name">
+    <input type="text" id="bioInterest" placeholder="Enter your interest">
+    <input type="text" id="bioProfession" placeholder="Enter your profession">
+    <button onclick="generateBio()">Generate Bio</button>
+    <p id="bioResult"></p>
   </div>
 
-  <!-- Urdu Typing Tool -->
+  <!-- Image Compressor (basic placeholder) -->
   <div class="tool">
-    <label for="urduInput">???? ??? ???? ????:</label>
-    <input type="text" id="urduInput" placeholder="???? ??? ?????..." oninput="urduTypingTool()" />
-    <div id="urduOutput" class="output"></div>
+    <h2>Image Compressor</h2>
+    <input type="file" id="imageInput">
+    <p><i>This is a placeholder. Real compression requires backend or advanced JS.</i></p>
+  </div>
+
+  <!-- Word Counter -->
+  <div class="tool">
+    <h2>Word Counter</h2>
+    <textarea id="wordText" rows="5" placeholder="Enter text here..."></textarea>
+    <button onclick="countWords()">Count Words</button>
+    <p id="wordCountResult"></p>
+  </div>
+
+  <!-- Text to Speech -->
+  <div class="tool">
+    <h2>Text-to-Speech</h2>
+    <textarea id="speechText" rows="3" placeholder="Enter text to speak..."></textarea>
+    <button onclick="speakText()">Speak</button>
   </div>
 
   <script>
-    // Simple text to emoji converter (few keywords)
-    function convertToEmoji() {
-      let text = document.getElementById('textInput').value.toLowerCase();
-      let emojiMap = {
-        'happy': '??',
-        'sad': '??',
-        'love': '??',
-        'fire': '??',
-        'star': '?',
-        'hello': '??',
-        'ok': '??',
-        'cool': '??',
-        'laugh': '??'
-      };
-      let words = text.split(' ');
-      let result = words.map(w => emojiMap[w] || w).join(' ');
-      document.getElementById('emojiOutput').innerText = result;
+    function generateBio() {
+      const name = document.getElementById('bioName').value;
+      const interest = document.getElementById('bioInterest').value;
+      const profession = document.getElementById('bioProfession').value;
+      const result = `${name} is a passionate ${profession} who loves ${interest}.`;
+      document.getElementById('bioResult').innerText = result;
     }
 
-    // Simple Urdu typing echo (just shows input here)
-    function urduTypingTool() {
-      let val = document.getElementById('urduInput').value;
-      document.getElementById('urduOutput').innerText = val;
+    function countWords() {
+      const text = document.getElementById('wordText').value.trim();
+      const wordCount = text ? text.split(/\s+/).length : 0;
+      const charCount = text.length;
+      document.getElementById('wordCountResult').innerText = `Words: ${wordCount}, Characters: ${charCount}`;
+    }
+
+    function speakText() {
+      const text = document.getElementById('speechText').value;
+      const speech = new SpeechSynthesisUtterance(text);
+      window.speechSynthesis.speak(speech);
     }
   </script>
-
 </body>
 </html>
