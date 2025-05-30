@@ -3,14 +3,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Tools Website</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; background-color: #f2f2f2; }
-    h1 { color: #333; }
-    textarea, input[type="text"] { width: 100%; padding: 10px; margin: 10px 0; }
-    button { padding: 10px 15px; margin: 10px 0; cursor: pointer; }
-    .tool { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f4; }
+    h1 { text-align: center; }
+    .tool { background: white; padding: 20px; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input, textarea, button { width: 100%; padding: 10px; margin-top: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; }
+    button { background-color: #007BFF; color: white; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+    .output { background: #eef; padding: 10px; border-radius: 5px; }
   </style>
 </head>
 <body>
@@ -19,53 +21,53 @@
   <!-- Bio Generator -->
   <div class="tool">
     <h2>Bio Generator</h2>
-    <input type="text" id="bioName" placeholder="Enter your name">
-    <input type="text" id="bioInterest" placeholder="Enter your interest">
-    <input type="text" id="bioProfession" placeholder="Enter your profession">
+    <input type="text" id="name" placeholder="Enter your name" />
+    <input type="text" id="interest" placeholder="Enter your interest" />
+    <input type="text" id="profession" placeholder="Enter your profession" />
     <button onclick="generateBio()">Generate Bio</button>
-    <p id="bioResult"></p>
+    <div class="output" id="bioOutput"></div>
   </div>
 
-  <!-- Image Compressor (basic placeholder) -->
+  <!-- Image Compressor -->
   <div class="tool">
     <h2>Image Compressor</h2>
-    <input type="file" id="imageInput">
-    <p><i>This is a placeholder. Real compression requires backend or advanced JS.</i></p>
+    <input type="file" />
+    <p><em>This is a placeholder. Real compression requires backend or advanced JS.</em></p>
   </div>
 
   <!-- Word Counter -->
   <div class="tool">
     <h2>Word Counter</h2>
-    <textarea id="wordText" rows="5" placeholder="Enter text here..."></textarea>
+    <textarea id="wordInput" rows="5" placeholder="Type or paste text here..."></textarea>
     <button onclick="countWords()">Count Words</button>
-    <p id="wordCountResult"></p>
+    <div class="output" id="wordOutput"></div>
   </div>
 
   <!-- Text to Speech -->
   <div class="tool">
-    <h2>Text-to-Speech</h2>
-    <textarea id="speechText" rows="3" placeholder="Enter text to speak..."></textarea>
+    <h2>Text to Speech</h2>
+    <textarea id="ttsInput" rows="3" placeholder="Enter text to speak..."></textarea>
     <button onclick="speakText()">Speak</button>
   </div>
 
   <script>
     function generateBio() {
-      const name = document.getElementById('bioName').value;
-      const interest = document.getElementById('bioInterest').value;
-      const profession = document.getElementById('bioProfession').value;
-      const result = `${name} is a passionate ${profession} who loves ${interest}.`;
-      document.getElementById('bioResult').innerText = result;
+      const name = document.getElementById('name').value;
+      const interest = document.getElementById('interest').value;
+      const profession = document.getElementById('profession').value;
+      const bio = `My name is ${name}. I am interested in ${interest} and I work as a ${profession}.`;
+      document.getElementById('bioOutput').textContent = bio;
     }
 
     function countWords() {
-      const text = document.getElementById('wordText').value.trim();
-      const wordCount = text ? text.split(/\s+/).length : 0;
-      const charCount = text.length;
-      document.getElementById('wordCountResult').innerText = `Words: ${wordCount}, Characters: ${charCount}`;
+      const text = document.getElementById('wordInput').value.trim();
+      const words = text === "" ? 0 : text.split(/\s+/).length;
+      const chars = text.length;
+      document.getElementById('wordOutput').textContent = `Words: ${words} | Characters: ${chars}`;
     }
 
     function speakText() {
-      const text = document.getElementById('speechText').value;
+      const text = document.getElementById('ttsInput').value;
       const speech = new SpeechSynthesisUtterance(text);
       window.speechSynthesis.speak(speech);
     }
